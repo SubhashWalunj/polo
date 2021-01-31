@@ -1,0 +1,8 @@
+.linkContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.linkContainer .linkButton {
+  margin: 10px;
+}

@@ -20,6 +20,7 @@
     "account-management-e2e": {
       "tags": [],
       "implicitDependencies": ["account-management"]
-    }
+    },
+    "ui": { "tags": [] }
   }
 }
