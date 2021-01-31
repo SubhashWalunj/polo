@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "account-management",
+  "projects": {
+    "account-management": {
+      "root": "apps/account-management",
+      "sourceRoot": "apps/account-management/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/account-management",
+            "index": "apps/account-management/src/index.html",
+            "main": "apps/account-management/src/main.tsx",
+            "polyfills": "apps/account-management/src/polyfills.ts",
+            "tsConfig": "apps/account-management/tsconfig.app.json",
+            "assets": [
+              "apps/account-management/src/favicon.ico",
+              "apps/account-management/src/assets"
+            ],
+            "styles": ["apps/account-management/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/account-management/src/environments/environment.ts",
+                  "with": "apps/account-management/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "account-management:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "account-management:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/account-management/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/account-management"],
+          "options": {
+            "jestConfig": "apps/account-management/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "account-management-e2e": {
+      "root": "apps/account-management-e2e",
+      "sourceRoot": "apps/account-management-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/account-management-e2e/cypress.json",
+            "tsConfig": "apps/account-management-e2e/tsconfig.e2e.json",
+            "devServerTarget": "account-management:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "account-management:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/account-management-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
